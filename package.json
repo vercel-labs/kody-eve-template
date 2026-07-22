@@ -1,0 +1,40 @@
+{
+  "dependencies": {
+    "@chat-adapter/state-redis": "^4.34.0",
+    "@github-tools/sdk": "^1.8.1",
+    "@resend/chat-sdk-adapter": "^0.2.2",
+    "@vercel/blob": "^2.6.1",
+    "@vercel/connect": "0.4.0",
+    "ai": "^7.0.35",
+    "chat": "^4.34.0",
+    "eve": "^0.27.1",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.5",
+    "@types/node": "~24.13.3",
+    "typescript": "7.0.2",
+    "ultracite": "^7.9.4"
+  },
+  "name": "github-digest-eve-template",
+  "scripts": {
+    "build": "eve build",
+    "dev": "eve dev",
+    "start": "eve start",
+    "typecheck": "tsc",
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "validate": "pnpm run check && pnpm run typecheck && eve info"
+  },
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "imports": {
+    "#*": "./agent/*",
+    "#evals/*": "./evals/*"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}
