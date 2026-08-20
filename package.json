@@ -18,21 +18,21 @@
     "validate": "pnpm run check && pnpm run typecheck && eve info"
   },
   "dependencies": {
-    "@chat-adapter/state-redis": "^4.37.0",
-    "@github-tools/sdk": "^1.10.0",
-    "@resend/chat-sdk-adapter": "^0.2.2",
-    "@vercel/blob": "^2.7.0",
-    "@vercel/connect": "0.6.1",
-    "ai": "^7.0.58",
-    "chat": "^4.37.0",
-    "eve": "^0.31.3",
+    "@chat-adapter/state-redis": "^4.38.1",
+    "@github-tools/sdk": "^1.11.1",
+    "@resend/chat-sdk-adapter": "^0.3.0",
+    "@vercel/blob": "^2.8.0",
+    "@vercel/connect": "0.8.0",
+    "ai": "^7.0.70",
+    "chat": "^4.38.1",
+    "eve": "^0.39.3",
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.7",
+    "@biomejs/biome": "^2.5.9",
     "@types/node": "~24.13.3",
     "typescript": "7.0.2",
-    "ultracite": "^7.10.2"
+    "ultracite": "^7.10.5"
   },
   "engines": {
     "node": "24.x"
