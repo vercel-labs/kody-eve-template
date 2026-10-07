@@ -101,6 +101,7 @@ agent/
   subagents/
     researcher/             # fresh-context web researcher (own session, web tools only)
   tools/
+    run_researcher.ts        # structured web research through the researcher subagent
     github.ts               # GitHub Tools SDK: read and triage issues on the repo
     get_user_preferences.ts   # load this user's saved preferences
     save_user_preferences.ts  # save standing preferences (per-user, principal-scoped)
