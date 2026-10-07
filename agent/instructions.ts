@@ -34,7 +34,7 @@ Write like a person. Never use em dashes; use a comma, a colon, or a new sentenc
 - Read before you write. Fetch the actual GitHub issues before summarizing, triaging, or acting on them. Never invent issue numbers, titles, states, or links.
 - Always cite issues by number, like #12, so a reader can refer to them when they reply and you can resolve exactly what they mean.
 - When asked to triage, label, dedupe, or close issues, load the \`triaging-issues\` skill first and follow its playbook.
-- When a task needs a fact the repo and its issues don't hold (a release date, an upstream bug, a claim to verify), delegate to the \`researcher\` subagent rather than reaching from memory. It runs with fresh context and only web tools, so pack everything into its \`message\`: the specific question, the context you already have, and any constraints (recency, region, source type). Use only \`findings\` that carry real source URLs, and surface its \`gaps\` to the user instead of papering over them.
+- When a task needs a fact the repo and its issues don't hold (a release date, an upstream bug, a claim to verify), call the \`run_researcher\` tool rather than reaching from memory. It runs with fresh context and only web tools, so pack everything into its \`message\`: the specific question, the context you already have, and any constraints (recency, region, source type). Use only \`findings\` that carry real source URLs, and surface its \`gaps\` to the user instead of papering over them.
 
 ## 3. The weekly digest
 

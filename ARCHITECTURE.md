@@ -35,6 +35,7 @@ agent/
   subagents/
     researcher/             # agent.ts + instructions.md; fresh-context web researcher (web tools only)
   tools/
+    run_researcher.ts        # structured web research through the researcher subagent
     github.ts               # GitHub Tools SDK (connectGithubTools, maintainer preset): read/triage issues; issue writes ungated
     get_user_preferences.ts   # Blob: load this user's saved preferences
     save_user_preferences.ts  # Blob: save standing preferences (principal-scoped)
@@ -64,9 +65,9 @@ agent/
 | Resend access | `agent/connections/resend.ts` | Connection (MCP) | List and send emails, manage templates and contacts; sends the weekly digest and any mail initiated outside an email thread (e.g. from a Linear session); static bearer token from `RESEND_API_KEY` |
 | User preferences | `agent/tools/{get,save,clear}_user_preferences.ts` + `agent/lib/user-preferences.ts` | Tools | Per-user standing preferences in Blob, keyed to the resolved principal (never model input) |
 | Skills | `agent/skills/` | Skill | Load-on-demand procedures: `writing-quality` (prose rules, loaded before drafting for humans), `digest-format` (the weekly digest's structure and criteria), `triaging-issues` (the triage playbook), `github-linear-bridging` (bridged-issue conventions and cross-links) |
-| Researcher subagent | `agent/subagents/researcher/` | Subagent | Fresh-context web research for facts the repo and tracker don't hold; uses framework `web_search`/`web_fetch`, returns cited findings + gaps |
+| Researcher | `agent/subagents/researcher/` + `agent/tools/run_researcher.ts` | Subagent + workflow tool | Fresh-context web research for facts the repo and tracker don't hold; the workflow wrapper requests cited structured findings from the child session |
 
-Channels and the connections are I/O boundaries. Tools run in the app runtime (full `process.env`). Skills only add instructions to context; they are not an execution surface. The `researcher` subagent runs in its own isolated child session, fresh context with none of the root's skills, connections, or tools, so the root packs everything it needs into the call `message`.
+Channels and the connections are I/O boundaries. Tools run in the app runtime (full `process.env`). Skills only add instructions to context; they are not an execution surface. The `researcher` subagent runs in its own isolated child session, fresh context with none of the root's skills, connections, or tools. The root calls `run_researcher`, whose workflow wrapper packs the request into the child session and returns structured findings.
 
 ## Data flow
 
@@ -95,7 +96,7 @@ There is no application database.
 | Resend (channel + MCP) | Email in (replies) and out (digest, confirmations, summaries) | Chat SDK channel with `@resend/chat-sdk-adapter` (Redis state, streaming off) plus MCP connection to `mcp.resend.com` (static bearer from `RESEND_API_KEY`); the channel's sender identity is set in `agent/channels/resend.ts`, the digest's in `RESEND_FROM_ADDRESS` |
 | Vercel Blob | Per-user preference storage | `@vercel/blob`, OIDC-authenticated |
 | Vercel AI Gateway | Model access | Gateway model ids resolved through the linked project; the root model is set in `agent/agent.ts` and the subagent sets its own in `agent/subagents/researcher/agent.ts` |
-| Vercel Sandbox | Isolated runtime that holds seeded skill files | `agent/sandbox.ts` (`vercel()` backend) |
+| Vercel Sandbox | Isolated runtime that holds seeded skill files | `agent/sandbox.ts` (`VercelSandbox.environment()`) |
 
 ## Deployment & infrastructure
 
