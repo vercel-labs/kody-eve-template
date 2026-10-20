@@ -18,14 +18,14 @@
     "validate": "pnpm run check && pnpm run typecheck && eve info"
   },
   "dependencies": {
-    "@chat-adapter/state-redis": "^4.41.1",
+    "@chat-adapter/state-redis": "^4.43.0",
     "@github-tools/sdk": "^1.11.1",
     "@resend/chat-sdk-adapter": "^0.3.0",
     "@vercel/blob": "^2.8.0",
     "@vercel/connect": "0.8.0",
-    "ai": "^7.0.131",
-    "chat": "^4.41.1",
-    "eve": "^0.73.0",
+    "ai": "^7.0.147",
+    "chat": "^4.43.0",
+    "eve": "^0.81.1",
     "zod": "4.4.3"
   },
   "devDependencies": {
