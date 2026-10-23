@@ -6,8 +6,15 @@ import { defineAgent } from "eve";
  * @remarks
  * The root delegates here when a task needs an outside fact: a statistic, a competitor detail,
  * a primary-source link, or a claim to verify. The researcher runs in a fresh child session and
- * inherits none of the root's skills, connections, or tools. Its workflow-tool wrapper requests
- * structured findings with the schema used by the caller.
+ * inherits none of the root's skills, connections, or tools — only the framework default harness,
+ * whose `web_search` and `web_fetch` cover web research with no extra wiring. It works solely
+ * from what the root packs into `message` plus what it fetches, so every claim must be grounded
+ * in a real source: the root weaves in only cited `findings` and surfaces `gaps` to the user.
+ *
+ * `tool: false` hides the derived subagent tool from the root model. The root reaches this
+ * agent through the same-named `researcher` workflow tool (`agent/tools/researcher.ts`), which
+ * opens a session with `ctx.agent("researcher")` and requests the structured, cited result per
+ * turn: eve no longer accepts `outputSchema` on `defineAgent`.
  *
  * @see The research methodology and output contract in this folder's `instructions.md`.
  */

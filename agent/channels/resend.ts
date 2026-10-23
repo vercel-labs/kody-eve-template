@@ -15,7 +15,10 @@ import { requireEnv } from "../lib/constants.js";
  * `RESEND_FROM_ADDRESS`, the same variable the system prompt and digest task use, so channel
  * replies and agent-sent mail share one identity. The destructured `bot` and `send` wire the
  * handlers below, which forward new mentions and follow-ups on subscribed threads into the
- * agent.
+ * agent. Each forward passes the Resend email id (prefixed `resend:`) as `idempotencyKey`, so
+ * a webhook redelivery of the same email does not reach the agent twice; the Chat SDK's own
+ * duplicate check can mark a message as seen before eve accepts it, so Redis state alone does
+ * not guarantee that.
  */
 export const { bot, channel, send } = chatSdkChannel({
   adapters: {
@@ -31,11 +34,11 @@ export const { bot, channel, send } = chatSdkChannel({
 
 bot.onNewMention(async (thread: Thread, message: Message) => {
   await thread.subscribe();
-  await send(message.text, { thread });
+  await send(message.text, { idempotencyKey: `resend:${message.id}`, thread });
 });
 
 bot.onSubscribedMessage(async (thread: Thread, message: Message) => {
-  await send(message.text, { thread });
+  await send(message.text, { idempotencyKey: `resend:${message.id}`, thread });
 });
 
 export default channel;
