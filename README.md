@@ -62,7 +62,7 @@ Set `RESEND_API_KEY` (used by both the email channel and the Resend MCP connecti
 | --- | --- |
 | Agent framework | [eve](https://eve.dev) |
 | Language | TypeScript (strict, ESM) |
-| GitHub surface & tools | eve GitHub channel + [GitHub Tools SDK](https://github.com/vercel-labs/github-tools) (maintainer preset), via [Vercel Connect](https://vercel.com/docs/connect) |
+| GitHub surface & tools | eve GitHub channel + [GitHub Tools eve extension](https://github-tools.com/frameworks/eve-extension) (maintainer preset), via [Vercel Connect](https://vercel.com/docs/connect) |
 | Linear surface & tools | eve Linear channel (Agent Sessions) via [Vercel Connect](https://vercel.com/docs/connect) + Linear MCP |
 | Email surface | Resend, via the [Chat SDK](https://chat-sdk.dev) channel (`@resend/chat-sdk-adapter`) with Redis state |
 | Email sending | Resend MCP (`mcp.resend.com`) |
@@ -85,7 +85,7 @@ I want to build a GitHub maintainer agent with the eve framework, using the Kody
 
 ```text
 agent/
-  agent.ts                  # model configuration, compaction, session token limits
+  agent.ts                  # model configuration, compaction, session usage limit
   instructions.ts           # the agent's behavior; compiled at build time with RESEND_FROM_ADDRESS baked in
   channels/
     github.ts               # eve GitHub Channel; @mentions in-thread + a summary comment on newly opened PRs
@@ -97,11 +97,13 @@ agent/
     resend.ts               # Resend MCP, static bearer token from RESEND_API_KEY
   schedules/
     weekly-digest.ts        # cron "0 9 * * 1" (Mondays 09:00 UTC); the agent composes and sends the digest
-  sandbox.ts                # Vercel Sandbox backend
+  sandbox.ts                # Vercel Sandbox environment
   subagents/
     researcher/             # fresh-context web researcher (own session, web tools only)
+  extensions/
+    github.ts               # GitHub Tools eve extension: read and triage issues on the repo (github__* tools)
   tools/
-    github.ts               # GitHub Tools SDK: read and triage issues on the repo
+    research.ts             # workflow tool: asks the researcher for cited findings (structured output)
     get_user_preferences.ts   # load this user's saved preferences
     save_user_preferences.ts  # save standing preferences (per-user, principal-scoped)
     clear_user_preferences.ts # clear this user's preferences (requires approval)
@@ -138,7 +140,7 @@ export default defineRemoteAgent({
 
 3. Set `CONTENT_AGENT_URL` in this project's environment and mention the new subagent in `agent/instructions.ts` so Kody knows when to hand off.
 
-The remote agent runs in its own deployment with its own skills and connections, and it never sees Kody's conversation history, so Kody packs everything the writer needs into the call `message`: the issues or PRs the piece covers, the audience, and the surface. The result comes back as a normal tool result, the same shape as the local `researcher` subagent.
+The remote agent runs in its own deployment with its own skills and connections, and it never sees Kody's conversation history, so Kody packs everything the writer needs into the call `message`: the issues or PRs the piece covers, the audience, and the surface. Like any subagent call, it runs as a task: Kody gets a receipt right away and the writer's reply arrives as the task's result.
 
 ## Local development
 
@@ -160,8 +162,10 @@ You can chat with the agent directly in the dev TUI to exercise the GitHub tools
 `eve dev` never fires schedules on their cron cadence. Trigger the digest by hand with the dev dispatch route:
 
 ```bash
-curl -X POST http://localhost:3000/eve/v1/dev/schedules/weekly-digest
+curl -X POST http://localhost:2000/eve/v1/dev/schedules/weekly-digest
 ```
+
+`pnpm build` prepares the Vercel Sandbox snapshot, so a local build needs the linked project's credentials (`vercel env pull`); deployments on Vercel have them automatically. Use `eve build --skip-sandbox-prewarm` to check that the app compiles without them (that output is not deployable).
 
 Ship changes with:
 
@@ -184,7 +188,7 @@ pnpm validate   # lint + typecheck + eve discovery diagnostics
 - **Behavior:** edit `agent/instructions.ts`. It describes the whole workflow: ground everything in the real tracker, the weekly digest shape, acting on email replies, Linear sessions, and GitHub mentions. The sending-email rule resolves `RESEND_FROM_ADDRESS` at build time.
 - **The digest:** the cron expression, subject line, and recipient live in `agent/schedules/weekly-digest.ts`; the digest's structure (grouping, needs-attention and stale criteria, one-line summaries) lives in `agent/skills/digest-format/SKILL.md`.
 - **PR summaries:** the `onPullRequest` hook and its task prompt live in `agent/channels/github.ts`. Adjust the dispatch condition there (for example, to include bot PRs or drafts) or the comment's shape.
-- **Approval gates:** `agent/tools/github.ts` sets `requireApproval: "never"` for the reversible issue-conversation writes because email cannot render an approval prompt; adjust the list to re-gate them. `clear_user_preferences` stays approval-gated.
+- **Approval gates:** `agent/extensions/github.ts` sets `requireApproval: "never"` for the reversible issue-conversation writes because email cannot render an approval prompt; adjust the list to re-gate them. `clear_user_preferences` stays approval-gated.
 - **Skills:** edit or add skills in `agent/skills/`. Each folder holds a `SKILL.md` plus its reference files.
 - **Model:** edit `agent/agent.ts` (or run `/model` in the dev TUI).
 - **Tools:** add or change tools in `agent/tools/`. The filename is the tool name.
