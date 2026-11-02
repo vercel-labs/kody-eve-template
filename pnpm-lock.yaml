@@ -16,7 +16,7 @@ importers:
         version: 4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)
       '@github-tools/eve-extension':
         specifier: ^0.9.0
-        version: 0.9.0(@vercel/connect@2.5.5(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))))(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)))(react@19.3.1)
+        version: 0.9.0(@vercel/connect@2.7.0)(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)(react@19.3.1)
       '@resend/chat-sdk-adapter':
         specifier: ^0.5.0
         version: 0.5.0(@chat-adapter/shared@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))(@react-email/render@2.1.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -24,8 +24,8 @@ importers:
         specifier: ^2.8.2
         version: 2.8.2
       '@vercel/connect':
-        specifier: 2.5.5
-        version: 2.5.5(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)))
+        specifier: 2.7.0
+        version: 2.7.0(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)
       ai:
         specifier: ^7.0.150
         version: 7.0.150(zod@4.6.7)
@@ -33,8 +33,8 @@ importers:
         specifier: ^4.43.0
         version: 4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)
       eve:
-        specifier: ^0.83.0
-        version: 0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))
+        specifier: ^1.0.0-rc.1
+        version: 1.0.0-rc.1(@vercel/connect@2.7.0)(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))(react@19.3.1)
       zod:
         specifier: 4.6.7
         version: 4.6.7
@@ -134,24 +134,28 @@ packages:
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@biomejs/cli-linux-arm64@2.5.15':
     resolution: {integrity: sha512-XaG7P7eeSLYETD3K9grfB0mQmpLQZjygdbsxekWBJAg4am79fGAtRpfRyNnTvXB2fZFNnJZG3nXm7HBat0+VUw==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@biomejs/cli-linux-x64-musl@2.5.15':
     resolution: {integrity: sha512-IlxUcyxilVGPsE008x13pWdkTbU3nQpP2i9b5UrbOYj6goBkKsRX1XB7yJLcV+O1H9LBchIIm4adOaVLZBX0ZQ==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@biomejs/cli-linux-x64@2.5.15':
     resolution: {integrity: sha512-xE4iEW/3LqlYj9GFgGrFsFSH51dEEpUbYWBfeOv0q87WkUDxK2o/HhreSb7qMJqck70RVM6Lg96hgedcAYcOkA==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@biomejs/cli-win32-arm64@2.5.15':
     resolution: {integrity: sha512-2kPKzhNlm8C+Ru3GcO0Me2ODkCBLrVOUNuyi84RJyWDVKAA4+Kjj3jMjL938lF6BRfvltC4vB2nPY9SvN51Ovg==}
@@ -620,36 +624,42 @@ packages:
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@rolldown/binding-linux-arm64-musl@1.2.15':
     resolution: {integrity: sha512-uN26XOnVR7rqQupG3V9oAG2EGGatWjcJHOeDOHUFCh4TBWmP2tHTFoVN13aYbwfm0aHqJAEmcwhAu6sooIjfqQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@rolldown/binding-linux-ppc64-gnu@1.2.15':
     resolution: {integrity: sha512-9nWkcdd+H+XhaA3fQIwpHnKIrfx/PQ6rO0pivr78Og07tXlUlctBBJoEYLPfhTmCR/QxEVdn6uPjHV5SymPhdw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [ppc64]
     os: [linux]
+    libc: [glibc]
 
   '@rolldown/binding-linux-s390x-gnu@1.2.15':
     resolution: {integrity: sha512-Ggh0ciFjLwIusLSLz7LZYEaGdxOAUJXI+Qu5JCbhPJJHEt8vP+IjRATTJheiJsdzzTYgUiHUiw3X1Ea3ZpMBdA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@rolldown/binding-linux-x64-gnu@1.2.15':
     resolution: {integrity: sha512-FHg60rS6DBePAYZ9X9F67x+JObFdmgn6tupA1C/a3B+CufFmTD4mX+e8M75tCiAO3foR/6xwVBI0KQiI7sn/rw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rolldown/binding-linux-x64-musl@1.2.15':
     resolution: {integrity: sha512-/cvV/7v5VGz/moiz0XKRj2dE8DzsKyhIu1KpOvJGPjRywg3yscON889UGvAe8zfiJLHup7VLjBduoGWi3HusWQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@rolldown/binding-openharmony-arm64@1.2.15':
     resolution: {integrity: sha512-MyzC5Hrv/sm+Z7TSGKP/j8001RO2xQm1zOpCNVL4j0cY/VhBZviludA2YFQ7i4lH6ZAXxQm0lcMdBzM+99mE7w==}
@@ -848,15 +858,15 @@ packages:
   '@vercel/cli-config@0.3.1':
     resolution: {integrity: sha512-sISbygqlFXYb8qfPu/+2Cf/A8IjrlAuZePdag3EDQr2PRA455s7UZtl9Ro674CWsB/saBRmz3jEkw0YsQs8OoQ==}
 
-  '@vercel/cli-config@0.3.3':
-    resolution: {integrity: sha512-5T0ZtIFgcFHuPFuuoJKno5ZeKvLQGiS/JAFMI1zG1HBw2dklScoHdA0LDb/SoeRYD53N33iXFAqyRA0tHLhdnQ==}
+  '@vercel/cli-config@0.3.5':
+    resolution: {integrity: sha512-O7y3EFzHENSLtE/3fjM3vIRqDpFFhZor2dMcZaND4G1d88gQk9u8yBcZhRR9CKnBowgzXdl0qcXkuINI05I72w==}
 
   '@vercel/cli-exec@1.0.1':
     resolution: {integrity: sha512-g9XerViJ/paZujufXYcu5XYI2vU2rtB4sgdpjUHde5RnOkdmpu0ngH46LCFGHoPXO/C+qDPSczIHIRN+8Q2YKQ==}
     engines: {node: '>= 18'}
 
-  '@vercel/connect@2.5.5':
-    resolution: {integrity: sha512-YUkQWcOb1afTwK36xfmJbPDDssuAcJtmOyxtePdyHH6SD5QaUfXLpvgFIW0lHnHMyaJC06phG/gYCNg4Uw/f2w==}
+  '@vercel/connect@2.7.0':
+    resolution: {integrity: sha512-kwg83Oo2LLYeFZnMuOI/OtRaJNNuSw6sR3ChdKBk2heKRMmach54ElGAxFrDoE+pfT9eIGVdjU3ct0GaoHF9Vw==}
     peerDependencies:
       '@ai-sdk/mcp': ^1 || ^2
       '@auth/core': '>=0.41.3'
@@ -864,7 +874,7 @@ packages:
       '@modelcontextprotocol/sdk': ^1.29.0
       ai: ^6 || ^7.0.0-beta.0
       better-auth: '>=1.5.0'
-      eve: '>=0.39.1'
+      eve: '>=0.39.1 || >=1.0.0-0'
     peerDependenciesMeta:
       '@ai-sdk/mcp':
         optional: true
@@ -889,8 +899,8 @@ packages:
     resolution: {integrity: sha512-sPw1kIfQEA6/2dB+zlAJHnhhNBRJ8t/t4HfFvKO+g0EPBA7NbCKyGovuhgAV6Mnl865ka7HqCEguIy596czdAw==}
     engines: {node: '>= 20'}
 
-  '@vercel/oidc@4.0.3':
-    resolution: {integrity: sha512-0sljpA/leE1vLkY7DVOs/z/OH6x1hgKhrF+IY2YdbRYm/6UnQjeu0SMnzOKLtkJWp13srUFkWdir4iU3feFYfg==}
+  '@vercel/oidc@4.0.5':
+    resolution: {integrity: sha512-E+duTxv0W8r3qNCGUYxTLt0V0BlLUlrEqxYOu2OoFubIbxwGjwm4wofache+YgU6Sr0MwoAA/vsSrrNrrWjimw==}
     engines: {node: '>= 20'}
 
   '@workflow/serde@4.1.0':
@@ -1148,19 +1158,36 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eve@0.83.0:
-    resolution: {integrity: sha512-qxw8Ck/vBrfIAqgodalXKkpE86eDcydNaJ2ww2AiHVs7CgGCu5qSipr5vOSc4GXkDssbJ9DaV4iVtol2kwV8Hg==}
+  eve@1.0.0-rc.1:
+    resolution: {integrity: sha512-yg1zd3Wwi0OY+ue6NP8IV3gPa+Kth9jIB6Af0/sqVElySXWKxL9j0lNkTAddTI38SbyEu0Z11YCZhIlaOQTZLQ==}
     engines: {node: '>=24'}
     hasBin: true
     peerDependencies:
+      '@linqapp/sdk': ^0.47.1
+      '@nuxt/kit': ^4.0.0
+      '@nuxt/schema': ^4.0.0
       '@opentelemetry/api': ^1.0.0
+      '@vercel/connect': ^2.7.0
       ai: ^7.0.137
       braintrust: ^3.0.0
       chat: ^4.42.0
       dd-trace: ^6.13.0
-      just-bash: ^3.1.0
+      just-bash: ^3.6.0
+      next: ^16.0.0
+      react: ^19.0.0
+      svelte: ^5.0.0
+      vite: ^8.3.1
+      vue: ^3.5.0
     peerDependenciesMeta:
+      '@linqapp/sdk':
+        optional: true
+      '@nuxt/kit':
+        optional: true
+      '@nuxt/schema':
+        optional: true
       '@opentelemetry/api':
+        optional: true
+      '@vercel/connect':
         optional: true
       braintrust:
         optional: true
@@ -1169,6 +1196,16 @@ packages:
       dd-trace:
         optional: true
       just-bash:
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vite:
+        optional: true
+      vue:
         optional: true
 
   eventsource-parser@3.1.1:
@@ -2022,8 +2059,8 @@ packages:
     resolution: {integrity: sha512-03KrMbjIFDWQR5RNPrSw3bd1r12JpyFQl9/yxjUbJtqkjmllqC5lFjZh6ujeuJCKr8EOQvRW872Oy/az+nLYxg==}
     engines: {node: '>=20.18.1'}
 
-  undici@8.10.2:
-    resolution: {integrity: sha512-/y4/bH9YNU5hi9NIrpOuvGXFcxrj3CMrV+/AYpowAYTpHn8gX/XPFjNy766FPoYY0miQhdW977JFWKGNhBdwyQ==}
+  undici@8.12.3:
+    resolution: {integrity: sha512-+fdndUTwBP86cVjihTp21hZHo7d6oj1c/47XPA3lL8mM0XHs+C4EkcjmgRsFnFk2f/UONGDy9ItBItmXsLOQHw==}
     engines: {node: '>=22.19.0'}
 
   unenv@2.0.0-rc.24:
@@ -2346,13 +2383,13 @@ snapshots:
   '@esbuild/win32-x64@0.28.2':
     optional: true
 
-  '@github-tools/eve-extension@0.9.0(@vercel/connect@2.5.5(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))))(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)))(react@19.3.1)':
+  '@github-tools/eve-extension@0.9.0(@vercel/connect@2.7.0)(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)(react@19.3.1)':
     dependencies:
-      '@github-tools/sdk': 1.18.0(@vercel/connect@2.5.5(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))))(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)))(react@19.3.1)(zod@4.6.7)
-      eve: 0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))
+      '@github-tools/sdk': 1.18.0(@vercel/connect@2.7.0)(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)(react@19.3.1)(zod@4.6.7)
+      eve: 1.0.0-rc.1(@vercel/connect@2.7.0)(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))(react@19.3.1)
       zod: 4.6.7
     optionalDependencies:
-      '@vercel/connect': 2.5.5(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)))
+      '@vercel/connect': 2.7.0(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)
     transitivePeerDependencies:
       - '@ai-sdk/workflow'
       - '@nestjs/common'
@@ -2378,15 +2415,15 @@ snapshots:
       - vite
       - workflow
 
-  '@github-tools/sdk@1.18.0(@vercel/connect@2.5.5(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))))(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)))(react@19.3.1)(zod@4.6.7)':
+  '@github-tools/sdk@1.18.0(@vercel/connect@2.7.0)(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)(react@19.3.1)(zod@4.6.7)':
     dependencies:
       ai: 7.0.150(zod@4.6.7)
-      evlog: 2.33.1(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)))(react@19.3.1)
+      evlog: 2.33.1(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)(react@19.3.1)
       octokit: 5.0.5
       zod: 4.6.7
     optionalDependencies:
-      '@vercel/connect': 2.5.5(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)))
-      eve: 0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))
+      '@vercel/connect': 2.7.0(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)
+      eve: 1.0.0-rc.1(@vercel/connect@2.7.0)(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))(react@19.3.1)
     transitivePeerDependencies:
       - '@nestjs/common'
       - '@nestjs/core'
@@ -2813,7 +2850,7 @@ snapshots:
       xdg-app-paths: 5.5.1
       zod: 4.1.11
 
-  '@vercel/cli-config@0.3.3':
+  '@vercel/cli-config@0.3.5':
     dependencies:
       xdg-app-paths: 5.5.1
       zod: 4.1.11
@@ -2822,12 +2859,12 @@ snapshots:
     dependencies:
       execa: 5.1.1
 
-  '@vercel/connect@2.5.5(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)))':
+  '@vercel/connect@2.7.0(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)':
     dependencies:
-      '@vercel/oidc': 4.0.3
+      '@vercel/oidc': 4.0.5
     optionalDependencies:
       ai: 7.0.150(zod@4.6.7)
-      eve: 0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))
+      eve: 1.0.0-rc.1(@vercel/connect@2.7.0)(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))(react@19.3.1)
 
   '@vercel/oidc@3.2.0': {}
 
@@ -2837,9 +2874,9 @@ snapshots:
       '@vercel/cli-exec': 1.0.1
       jose: 5.10.0
 
-  '@vercel/oidc@4.0.3':
+  '@vercel/oidc@4.0.5':
     dependencies:
-      '@vercel/cli-config': 0.3.3
+      '@vercel/cli-config': 0.3.5
       '@vercel/cli-exec': 1.0.1
       jose: 5.10.0
 
@@ -3102,20 +3139,22 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)):
+  eve@1.0.0-rc.1(@vercel/connect@2.7.0)(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))(react@19.3.1):
     dependencies:
       ai: 7.0.150(zod@4.6.7)
       nitro: 3.0.260903-beta
-      undici: 8.10.2
+      undici: 8.12.3
     optionalDependencies:
+      '@vercel/connect': 2.7.0(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)
       chat: 4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)
+      react: 19.3.1
 
   eventsource-parser@3.1.1: {}
 
-  evlog@2.33.1(ai@7.0.150(zod@4.6.7))(eve@0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7)))(react@19.3.1):
+  evlog@2.33.1(ai@7.0.150(zod@4.6.7))(eve@1.0.0-rc.1)(react@19.3.1):
     optionalDependencies:
       ai: 7.0.150(zod@4.6.7)
-      eve: 0.83.0(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))
+      eve: 1.0.0-rc.1(@vercel/connect@2.7.0)(ai@7.0.150(zod@4.6.7))(chat@4.43.0(ai@7.0.150(zod@4.6.7))(zod@4.6.7))(react@19.3.1)
       react: 19.3.1
 
   execa@10.2.0:
@@ -4125,7 +4164,7 @@ snapshots:
 
   undici@7.30.1: {}
 
-  undici@8.10.2: {}
+  undici@8.12.3: {}
 
   unenv@2.0.0-rc.24:
     dependencies:
