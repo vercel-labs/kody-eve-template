@@ -20,13 +20,13 @@
   "dependencies": {
     "@chat-adapter/shared": "^4.43.0",
     "@chat-adapter/state-redis": "^4.43.0",
-    "@github-tools/eve-extension": "^0.9.0",
+    "@github-tools/eve-extension": "^0.13.0",
     "@resend/chat-sdk-adapter": "^0.5.0",
     "@vercel/blob": "^2.8.2",
-    "@vercel/connect": "2.5.5",
-    "ai": "^7.0.150",
+    "@vercel/connect": "2.9.3",
+    "ai": "^7.0.173",
     "chat": "^4.43.0",
-    "eve": "^0.83.0",
+    "eve": "^1.0.0",
     "zod": "4.6.7"
   },
   "devDependencies": {
